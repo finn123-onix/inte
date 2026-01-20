@@ -1,0 +1,173 @@
+body, html
+{
+   width: 100%;
+   height: 100%;
+   margin: 0;
+   padding: 0;
+   overflow: hidden;
+   font-size: 16px;
+   font-family: helvetica, arial;
+   background: #f9f9f9;
+   color: #111;
+}
+
+.wrapper
+{
+   width: 100%;
+   height: 100%;
+   display: table;
+}
+
+.main
+{
+   display: table-cell;
+   vertical-align: middle;
+   text-align: center;
+}
+
+.quiz-frame
+{
+   border: 0;
+   box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.quiz__head
+{
+   font-size: 20pt;
+   margin: 10px;
+   margin-bottom: 50px;
+}
+
+.head__content
+{
+   padding: 5px;
+}
+
+.quiz__body
+{
+   margin: 10px;
+}
+
+.quiz__footer
+{
+   position: absolute;
+   bottom: 0;
+   display: block;
+   width: 100%;
+}
+
+.footer__content
+{
+   padding: 5px;
+}
+
+.button
+{
+   border: 0;
+   border-radius: 10px;
+   background: #6477EB;
+   color: #fff;
+   padding: 10px 25px;
+   width: 70%;
+   font-size: 15pt;
+   display: block;
+   margin: 2px auto;
+   cursor: pointer;
+}
+
+.button_wrong
+{
+   background: #EB6465;
+}
+
+.button_correct
+{
+   background: #5EB97D;
+}
+
+.button_passive
+{
+   background: #B3B3B3;
+}
+body {
+ min-height: 100vh;
+ font-family: "Poppins", sans-serif;
+ background-image: url(../images/bg.jpg);
+ background-repeat: no-repeat;
+ background-position: center center;
+ background-size: cover;
+}
+.logo{
+ padding: 0 75px;
+}
+
+
+.container {
+ max-width: 1190px;
+ padding: 0 15px;
+ margin: 0 auto;
+}
+.header{
+  height: 20%;
+  background: "#798DBB";
+}
+.header__top {
+ padding: 30px;
+}
+
+
+.menu__list {
+ display: flex;
+ justify-content: center;
+ list-style: none;
+}
+
+.menu__list-item {
+ margin: 0 10px;
+}
+
+.menu__list-link {
+ position: relative;
+ color: #fffee7;
+ font-size: 1.1em;
+ text-decoration: none;
+ padding: 6px 20px;
+ cursor: pointer;
+}
+
+.menu__list-link span {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ border: 2px solid #fff;
+ border-radius: 7px;
+ transform: scale(0);
+ opacity: 0;
+ transition: transform 0.5s;
+}
+
+.menu__list-link:hover span {
+ transform: scale(1);
+ opacity: 1;
+}
+
+.header__content-inner {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: space-between;
+ height: 80vh;
+}
+
+.header__title {
+ font-size: 9em;
+ text-align: center;
+ -webkit-text-stroke: 1px #fff;
+ color: transparent;
+ background: url(/images/back-text.png);
+ -webkit-background-clip: text;
+ background-position: 0 0;
+ animation: backText 20s linear infinite alternate;
+}

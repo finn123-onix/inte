@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ru">
+<font color="White" size="5">
+<head>
+<meta charset="UTF-8" />
+<title>Тест с таблицей лидеров</title>
+<link rel="stylesheet" href="eschocss.css" />
+<style>
+  table {
+    width: 60%;
+    border-collapse: collapse;
+    margin: 20px auto;
+  }
+  th, td {
+    border: 1px solid #fff;
+    padding: 8px;
+    text-align: center;
+  }
+  th {
+    background-color: #555;
+  }
+</style>
+</head>
+<body style="background-image:url('img/fon2.jpg');">
+<header class="header">
+    <div class="logo"><a href="Index.html"><img align="left" width="125" height="105" src="img/logot.jpg"></a></div>
+     <div style="background-color:#798DBB" class="header__top">
+       <div class="container">
+         <div class="header__top-inner">
+           <nav class="menu">
+             <ul class="menu__list">
+               <li class="menu__list-item">
+                 <a class="menu__list-link" href="Class.html">Тесты<span></span></a>
+               </li>
+                 <li class="menu__list-item">
+                 <a> ︎  ︎ ︎ </a>
+               </li>
+             </ul>
+           </nav>
+         </div>
+       </div>
+     </div>
+</header>
+
+<div class="wrapper">
+<main class="main">
+<div class="quiz__head">
+  <div class="head__content" id="head"></div>
+</div>
+<div class="quiz__body">
+  <div class="buttons" id="buttons"></div>
+  <div class="quiz__footer">
+    <div class="footer__content" id="pages">0 / 0</div>
+  </div>
+</div>
+</main>
+</div>
+
+<script>
+const headElem = document.getElementById("head");
+const buttonsElem = document.getElementById("buttons");
+const pagesElem = document.getElementById("pages");
+
+// Массив результатов
+const results = [
+  { text: "Отлично!", Check: (score) => score >= 17 },
+  { text: "Хорошо", Check: (score) => score >= 14 },
+  { text: "Нужно повторить", Check: (score) => true }
+];
+
+const questions = [
+  {
+    text: "Примером текстовой информации может служить:",
+    answers: [
+      { text: "Таблица умножения на обложке школьной тетради", value: 0 },
+      { text: "Иллюстрация в книге", value: 0 },
+      { text: "Правило в учебнике родного языка", value: 1 },
+      { text: "Фотография", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Обмен информацией – это:",
+    answers: [
+      { text: "Выполнение домашней работы", value: 0 },
+      { text: "Просмотр телепрограммы", value: 0 },
+      { text: "Наблюдение за поведением рыб в аквариуме", value: 0 },
+      { text: "Разговор по телефону", value: 1 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "2048 байт в килобайтах.",
+    answers: [
+      { text: "2", value: 1 },
+      { text: "1", value: 0 },
+      { text: "128", value: 0 },
+      { text: "1024", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Что из перечисленного НЕ является приложением?",
+    answers: [
+      { text: "Draw", value: 0 },
+      { text: "Linux", value: 1 },
+      { text: "Writer", value: 0 },
+      { text: "Skype", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Компьютер это –",
+    answers: [
+      { text: "Электронное вычислительное устройство для обработки чисел", value: 0 },
+      { text: "Устройство для хранения информации любого вида", value: 0 },
+      { text: "Многофункциональное электронное устройство для работы с информацией", value: 1 },
+      { text: "Устройство для обработки аналоговых сигналов", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Непрерывным называют сигнал:",
+    answers: [
+      { text: "Несущий какую-либо информацию", value: 0 },
+      { text: "Несущий текстовую информацию", value: 0 },
+      { text: "Принимающий конечное число определенных значений", value: 0 },
+      { text: "Непрерывно изменяющийся во времени", value: 1 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Дискретизация информации — это:",
+    answers: [
+      { text: "Физический процесс, изменяющийся во времени", value: 0 },
+      { text: "Количественная характеристика сигнала", value: 0 },
+      { text: "Процесс преобразования информации из непрерывной формы в дискретную", value: 1 },
+      { text: "Процесс преобразования информации из дискретной формы в непрерывную", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "При двоичном кодировании используется алфавит, состоящий из:",
+    answers: [
+      { text: "0 и 1", value: 1 },
+      { text: "Слов ДА и НЕТ", value: 0 },
+      { text: "Знаков + и —", value: 0 },
+      { text: "Любых двух символов", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Шахматная доска состоит из 8 столбцов и 8 строк. Какое минимальное количество битов потребуется для кодирования координат одного шахматного поля?",
+    answers: [
+      { text: "7", value: 0 },
+      { text: "6", value: 1 },
+      { text: "5", value: 0 },
+      { text: "4", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Гипертекст — это:",
+    answers: [
+      { text: "Очень большой текст", value: 0 },
+      { text: "Текст, набранный на компьютере", value: 0 },
+      { text: "Текст, в котором могут осуществляться переходы по ссылкам", value: 1 },
+      { text: "Текст, в котором используется шрифт большого размера", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Под носителем информации принято подразумевать:",
+    answers: [
+      { text: "Материальный объект, на котором можно тем или иным способом зафиксировать информацию", value: 1 },
+      { text: "Компьютер", value: 0 },
+      { text: "Сеть Интернет", value: 0 },
+      { text: "Линию связи", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Дан текст из 600 символов. Известно, что символы берутся из таблицы размером 16 × 32. Определите информационный объём текста в битах.",
+    answers: [
+      { text: "3600", value: 0 },
+      { text: "5400", value: 1 },
+      { text: "2400", value: 0 },
+      { text: "1000", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Иван получил по электронной почте архив, размер которого 368 640 бит. Выразите объем полученного архива в Кбайт.",
+    answers: [
+      { text: "40", value: 0 },
+      { text: "50", value: 0 },
+      { text: "55", value: 0 },
+      { text: "45", value: 1 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Компьютерные вирусы:",
+    answers: [
+      { text: "Возникают в связи сбоев в аппаратной части компьютера", value: 0 },
+      { text: "Имеют биологическое происхождение", value: 0 },
+      { text: "Создаются людьми специально для нанесения ущерба ПК", value: 1 },
+      { text: "Являются следствием ошибок в операционной системе", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Какая из программ не является антивирусом:",
+    answers: [
+      { text: "Dr.Web", value: 0 },
+      { text: "MS Word", value: 1 },
+      { text: "Avast Antivirus", value: 0 },
+      { text: "Антивирус Касперского", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "В какой строке единицы измерения информации расположены по возрастанию?",
+    answers: [
+      { text: "Гигабайт, мегабайт, килобайт, байт, бит", value: 0 },
+      { text: "Бит, байт, мегабайт, килобайт, гигабайт", value: 0 },
+      { text: "Байт, бит, килобайт, мегабайт, гигабайт", value: 0 },
+      { text: "Бит, байт, килобайт, мегабайт, гигабайт", value: 1 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Устройством для вывода текстовой информации является:",
+    answers: [
+      { text: "Клавиатура", value: 0 },
+      { text: "Экран дисплея", value: 1 },
+      { text: "Дисковод", value: 0 },
+      { text: "Мышь", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Имя файла состоит из двух частей:",
+    answers: [
+      { text: "Адрес первого сектора и объема файла", value: 0 },
+      { text: "Области хранения файлов и каталога", value: 0 },
+      { text: "Имени и расширения", value: 1 },
+      { text: "Имени и адреса первого сектора", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Наименьшая единица измерения количества информации:",
+    answers: [
+      { text: "1 бит", value: 1 },
+      { text: "1 байт", value: 0 },
+      { text: "1 килобайт", value: 0 },
+      { text: "1 мегабайт", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   }
+];
+
+let userName = "";
+let quizCompleted = false;
+
+
+let leaders = [];
+if (localStorage.getItem('leaders')) {
+  leaders = JSON.parse(localStorage.getItem('leaders'));
+}
+
+
+let namePrompted = false;
+function askName() {
+  if (!namePrompted) {
+    userName = prompt("Пожалуйста, введите ваше имя:");
+    if (userName === null || userName.trim() === "") {
+      userName = "Аноним";
+    }
+    namePrompted = true;
+  }
+}
+
+askName();
+
+class Quiz {
+  constructor(questions, results) {
+    this.questions = questions;
+    this.results = results;
+    this.score = 0;
+    this.result = 0;
+    this.current = 0;
+  }
+
+  Click(index) {
+    let value = this.questions[this.current].Click(index);
+    this.score += value;
+    let correct = -1;
+    if (value >= 1) {
+      correct = index;
+    } else {
+      for (let i = 0; i < this.questions[this.current].answers.length; i++) {
+        if (this.questions[this.current].answers[i].value >= 1) {
+          correct = i;
+          break;
+        }
+      }
+    }
+    this.Next();
+    return correct;
+  }
+
+  Next() {
+    this.current++;
+    if (this.current >= this.questions.length) {
+      this.End();
+    } else {
+      Update();
+    }
+  }
+
+  End() {
+    for (let i = 0; i < this.results.length; i++) {
+      if (this.results[i].Check(this.score)) {
+        this.result = i;
+        break;
+      }
+    }
+    addLeader(userName, this.score);
+    showResults();
+  }
+}
+
+const quiz = new Quiz(questions, results);
+
+function addLeader(name, score) {
+  leaders.push({ name: name, score: score });
+  leaders.sort((a, b) => b.score - a.score);
+  localStorage.setItem('leaders', JSON.stringify(leaders));
+}
+
+function showResults() {
+  let html = `<h2>Таблица лидеров</h2>
+              <table>
+                <tr>
+                  <th>Имя</th>
+                  <th>Результат</th>
+                </tr>`;
+  for (let leader of leaders) {
+    html += `<tr><td>${leader.name}</td><td>${leader.score}</td></tr>`;
+  }
+  html += `</table>`;
+  headElem.innerHTML = html;
+  buttonsElem.innerHTML = "";
+  pagesElem.innerHTML = "";
+  quizCompleted = true;
+}
+
+function Update() {
+  if (quiz.current < quiz.questions.length) {
+    headElem.innerHTML = quiz.questions[quiz.current].text;
+    buttonsElem.innerHTML = "";
+    quiz.questions[quiz.current].answers.forEach((answer, i) => {
+      let btn = document.createElement("button");
+      btn.className = "button";
+      btn.innerHTML = answer.text;
+      btn.setAttribute("index", i);
+      buttonsElem.appendChild(btn);
+    });
+    pagesElem.innerHTML = (quiz.current + 1) + " / " + quiz.questions.length;
+    Init();
+  } else {
+    showResults();
+  }
+}
+
+function Init() {
+  const btns = document.querySelectorAll(".button");
+  btns.forEach(btn => {
+    btn.onclick = () => {
+      if (quizCompleted) return;
+      const index = parseInt(btn.getAttribute("index"));
+      quiz.Click(index);
+    };
+  });
+}
+
+
+Update();
+</script>
+</body>
+</html>
