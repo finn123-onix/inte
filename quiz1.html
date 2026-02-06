@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ru">
+<font color="White" size="5">
+<head>
+<meta charset="UTF-8" />
+<title>Тест с таблицей лидеров</title>
+<link rel="stylesheet" href="eschocss.css" />
+<style>
+  table {
+    width: 60%;
+    border-collapse: collapse;
+    margin: 20px auto;
+  }
+  th, td {
+    border: 1px solid #fff;
+    padding: 8px;
+    text-align: center;
+  }
+  th {
+    background-color: #555;
+  }
+</style>
+</head>
+<body style="background-image:url('img/fon2.jpg');">
+<header class="header">
+    <div class="logo"><a href="Index.html"><img align="left" width="125" height="105" src="img/logot.jpg"></a></div>
+     <div style="background-color:#798DBB" class="header__top">
+       <div class="container">
+         <div class="header__top-inner">
+           <nav class="menu">
+             <ul class="menu__list">
+               <li class="menu__list-item">
+                 <a class="menu__list-link" href="Class.html">Тесты<span></span></a>
+               </li>
+                 <li class="menu__list-item">
+                 <a> ︎  ︎ ︎ </a>
+               </li>
+             </ul>
+           </nav>
+         </div>
+       </div>
+     </div>
+</header>
+
+<div class="wrapper">
+<main class="main">
+<div class="quiz__head">
+  <div class="head__content" id="head"></div>
+</div>
+<div class="quiz__body">
+  <div class="buttons" id="buttons"></div>
+  <div class="quiz__footer">
+    <div class="footer__content" id="pages">0 / 0</div>
+  </div>
+</div>
+</main>
+</div>
+
+<script>
+const headElem = document.getElementById("head");
+const buttonsElem = document.getElementById("buttons");
+const pagesElem = document.getElementById("pages");
+
+
+const finalResultDiv = document.createElement("div");
+finalResultDiv.id = "finalResult";
+finalResultDiv.style = "text-align: center; font-size: 24px; font-weight: bold; margin-bottom: 10px;";
+
+
+headElem.parentNode.insertBefore(finalResultDiv, headElem.nextSibling);
+
+const results = [
+  { text: "5", Check: (score) => score >= 9 },
+  { text: "4", Check: (score) => score >= 7 },
+  { text: "3", Check: (score) => score >= 5 },
+  { text: "2", Check: (score) => score < 5 }
+];
+
+const questions = [
+  {
+    text: "Минимальной единицей информации является:",
+    answers: [
+      { text: "Байт", value: 0 },
+      { text: "Бит", value: 1 },
+      { text: "Знак", value: 0 },
+      { text: "Пиксель", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Сколько байтов в одном килобайте?",
+    answers: [
+      { text: "8", value: 0 },
+      { text: "256", value: 0 },
+      { text: "1024", value: 1 },
+      { text: "1000", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Сколько байтов весит сообщение из 125 символов 16-символьного алфавита?",
+    answers: [
+      { text: "256", value: 0 },
+      { text: "500", value: 1 },
+      { text: "750", value: 0 },
+      { text: "1000", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Объем информационного сообщения «Краткость – сестра таланта», в котором вес каждого символа составляет 1 байт, равен (без учета кавычек):",
+    answers: [
+      { text: "26 бит", value: 0 },
+      { text: "208 бит", value: 1 },
+      { text: "256 бит", value: 0 },
+      { text: "20 байт", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Количество символов в алфавите называется:",
+    answers: [
+      { text: "Объемом", value: 0 },
+      { text: "Мощностью", value: 1 },
+      { text: "Весом", value: 0 },
+      { text: "Силой", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Информационный вес символа 512-символьном алфавите равен:",
+    answers: [
+      { text: "7 бит", value: 0 },
+      { text: "9 бит", value: 1 },
+      { text: "1 байт", value: 0 },
+      { text: "2 байта", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Слово ИНФОРМАТИКА закодировано с помощью алфавита мощностью 16. Сколько весит данное слово?",
+    answers: [
+      { text: "44 бит", value: 1 },
+      { text: "176 бит", value: 0 },
+      { text: "44 байт", value: 0 },
+      { text: "2 килобайта", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Какое из утверждений характерно для алфавитного подхода измерения информации?",
+    answers: [
+      { text: "При измерении информации учитывается ее смысловое содержание", value: 0 },
+      { text: "При определении объема сообщения не учитывается объем содержания", value: 1 },
+      { text: "Объем информации зависит от её актуальности для пользователя", value: 0 },
+      { text: "Вес символа зависит от частоты его использования", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Одна страница текста состоит из 25 строк, в каждой из которых по 50 символов. Сколько будет весить данное сообщение, если один символ можно закодировать 8 битами:",
+    answers: [
+      { text: "425 бит", value: 0 },
+      { text: "200 бит", value: 0 },
+      { text: "1024 байт", value: 0 },
+      { text: "10000 бит", value: 1 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   },
+  {
+    text: "Один байт равен:",
+    answers: [
+      { text: "6", value: 0 },
+      { text: "1024", value: 0 },
+      { text: "8", value: 1 },
+      { text: "7", value: 0 }
+    ],
+    Click: function(index) {
+     return this.answers[index].value;
+    }
+   }
+];
+
+
+
+let userName = "";
+let quizCompleted = false;
+
+let leaders = [];
+if (localStorage.getItem('leaders')) {
+  leaders = JSON.parse(localStorage.getItem('leaders'));
+}
+
+let namePrompted = false;
+function askName() {
+  if (!namePrompted) {
+    userName = prompt("Пожалуйста, введите ваше имя:");
+    if (userName === null || userName.trim() === "") {
+      userName = "Аноним";
+    }
+    namePrompted = true;
+  }
+}
+
+askName();
+
+class Quiz {
+  constructor(questions, results) {
+    this.questions = questions;
+    this.results = results;
+    this.score = 0;
+    this.result = 0;
+    this.current = 0;
+  }
+
+  Click(index) {
+    let value = this.questions[this.current].Click(index);
+    this.score += value;
+    let correct = -1;
+    if (value >= 1) {
+      correct = index;
+    } else {
+      for (let i = 0; i < this.questions[this.current].answers.length; i++) {
+        if (this.questions[this.current].answers[i].value >= 1) {
+          correct = i;
+          break;
+        }
+      }
+    }
+    this.Next();
+    return correct;
+  }
+
+  Next() {
+    this.current++;
+    if (this.current >= this.questions.length) {
+      this.End();
+    } else {
+      Update();
+    }
+  }
+
+  End() {
+    for (let i = 0; i < this.results.length; i++) {
+      if (this.results[i].Check(this.score)) {
+        this.result = i;
+        break;
+      }
+    }
+    addLeader(userName, this.score);
+    showResults();
+  }
+}
+
+const quiz = new Quiz(questions, results);
+
+function addLeader(name, score) {
+  leaders.push({ name: name, score: score });
+  leaders.sort((a, b) => b.score - a.score);
+  localStorage.setItem('leaders', JSON.stringify(leaders));
+}
+
+function showResults() {
+
+  const resultHTML = `<h2>Ваш результат: ${results[quiz.result].text} </h2>`;
+
+  let tableHTML = `<h2>Таблица лидеров</h2>
+              <table class="leader-table">
+                <tr>
+                  <th style="background-color: #FFC073;">Имя</th>
+                  <th style="background-color: #FFDA73;">Результат</th>
+                </tr>`;
+  for (let leader of leaders) {
+    tableHTML += `<tr>
+               <td style="background-color: #C3C7F4;">${leader.name}</td>
+               <td style="background-color: #BDDEF2;">${leader.score}</td>
+             </tr>`;
+  }
+  tableHTML += `</table>`;
+
+  headElem.innerHTML = resultHTML + tableHTML;
+  buttonsElem.innerHTML = "";
+  pagesElem.innerHTML = "";
+  quizCompleted = true;
+}
+
+function Update() {
+  if (quiz.current < quiz.questions.length) {
+    headElem.innerHTML = quiz.questions[quiz.current].text;
+    buttonsElem.innerHTML = "";
+    quiz.questions[quiz.current].answers.forEach((answer, i) => {
+      let btn = document.createElement("button");
+      btn.className = "button";
+      btn.innerHTML = answer.text;
+      btn.setAttribute("index", i);
+      buttonsElem.appendChild(btn);
+    });
+    pagesElem.innerHTML = (quiz.current + 1) + " / " + quiz.questions.length;
+    Init();
+  } else {
+    showResults();
+  }
+}
+
+function Init() {
+  const btns = document.querySelectorAll(".button");
+  btns.forEach(btn => {
+    btn.onclick = () => {
+      if (quizCompleted) return;
+      const index = parseInt(btn.getAttribute("index"));
+      quiz.Click(index);
+    };
+  });
+}
+
+Update();
+</script>
+</body>
+</html>

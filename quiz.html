@@ -33,7 +33,7 @@
                  <a class="menu__list-link" href="Class.html">Тесты<span></span></a>
                </li>
                  <li class="menu__list-item">
-                 <a> ︎  ︎ ︎ </a>
+                 <a> ︎  ︎ ︎ </a>
                </li>
              </ul>
            </nav>
@@ -61,11 +61,19 @@ const headElem = document.getElementById("head");
 const buttonsElem = document.getElementById("buttons");
 const pagesElem = document.getElementById("pages");
 
-// Массив результатов
+
+const finalResultDiv = document.createElement("div");
+finalResultDiv.id = "finalResult";
+finalResultDiv.style = "text-align: center; font-size: 24px; font-weight: bold; margin-bottom: 10px;";
+
+
+headElem.parentNode.insertBefore(finalResultDiv, headElem.nextSibling);
+
 const results = [
-  { text: "Отлично!", Check: (score) => score >= 17 },
-  { text: "Хорошо", Check: (score) => score >= 14 },
-  { text: "Нужно повторить", Check: (score) => true }
+  { text: "5", Check: (score) => score >= 18 },
+  { text: "4", Check: (score) => score >= 14 },
+  { text: "3", Check: (score) => score >= 10 },
+  { text: "2", Check: (score) => score < 10 }
 ];
 
 const questions = [
@@ -299,15 +307,15 @@ const questions = [
    }
 ];
 
+
+
 let userName = "";
 let quizCompleted = false;
-
 
 let leaders = [];
 if (localStorage.getItem('leaders')) {
   leaders = JSON.parse(localStorage.getItem('leaders'));
 }
-
 
 let namePrompted = false;
 function askName() {
@@ -379,17 +387,24 @@ function addLeader(name, score) {
 }
 
 function showResults() {
-  let html = `<h2>Таблица лидеров</h2>
-              <table>
+
+  const resultHTML = `<h2>Ваш результат: ${results[quiz.result].text} </h2>`;
+
+  let tableHTML = `<h2>Таблица лидеров</h2>
+              <table class="leader-table">
                 <tr>
-                  <th>Имя</th>
-                  <th>Результат</th>
+                  <th style="background-color: #FFC073;">Имя</th>
+                  <th style="background-color: #FFDA73;">Результат</th>
                 </tr>`;
   for (let leader of leaders) {
-    html += `<tr><td>${leader.name}</td><td>${leader.score}</td></tr>`;
+    tableHTML += `<tr>
+               <td style="background-color: #C3C7F4;">${leader.name}</td>
+               <td style="background-color: #BDDEF2;">${leader.score}</td>
+             </tr>`;
   }
-  html += `</table>`;
-  headElem.innerHTML = html;
+  tableHTML += `</table>`;
+
+  headElem.innerHTML = resultHTML + tableHTML;
   buttonsElem.innerHTML = "";
   pagesElem.innerHTML = "";
   quizCompleted = true;
@@ -423,7 +438,6 @@ function Init() {
     };
   });
 }
-
 
 Update();
 </script>
